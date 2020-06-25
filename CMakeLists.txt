@@ -3,18 +3,18 @@ project(EasyGL)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
 
 file(GLOB CPP_FILES source/*.cpp)
 
-link_directories(${CMAKE_SOURCE_DIR}/lib)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 find_package(OpenGL REQUIRED)
 find_package(glfw3 3.3 REQUIRED)
 message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIR}")
 
 if(WIN32)
-    set(LIBS OpenGL::GL glfw3)
+    set(LIBS OpenGL::GL ${GLFW3_LIBRARY})
 elseif(APPLE)
     INCLUDE_DIRECTORIES(/System/Library/Frameworks)
     FIND_LIBRARY(COCOA_LIBRARY Cocoa)
@@ -33,4 +33,4 @@ add_library(EasyGL STATIC ${CPP_FILES})
 
 target_link_libraries(EasyGL ${LIBS})
 
-include_directories(${CMAKE_SOURCE_DIR}/includes)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)
