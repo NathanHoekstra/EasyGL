@@ -27,7 +27,7 @@ else()
     set(LIBS )
 endif(WIN32)
 
-add_executable(EasyGL main.cpp easygl.cpp easygl.h)
+add_library(EasyGL easygl.cpp easygl.h)
 
 target_link_libraries(EasyGL ${LIBS})
 
