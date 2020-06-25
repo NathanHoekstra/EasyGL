@@ -1,5 +1,9 @@
 #include "../include/EasyGL/easygl.h"
 
+#ifdef __APPLE__
+// silence deprecation warnings
+#define GL_SILENCE_DEPRECATION
+#endif
 #include <GLFW/glfw3.h>
 
 int hello() {
