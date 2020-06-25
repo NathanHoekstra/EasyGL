@@ -2,6 +2,11 @@
 #define EASYGL_EASYGL_H
 
 #include <stdexcept>
+
+#ifdef __APPLE__
+// silence deprecation warnings
+#define GL_SILENCE_DEPRECATION
+#endif
 #include "../../includes/GLFW/glfw3.h"
 
 namespace EasyGL {
