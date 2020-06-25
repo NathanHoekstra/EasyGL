@@ -1,38 +1,41 @@
 #include "../include/EasyGL/easygl.h"
 
-#include <GLFW/glfw3.h>
+namespace EasyGL {
 
-int hello() {
-    GLFWwindow* window;
+    easy_gl::easy_gl(const int &width, const int &height, const char *title) {
+        /* Initialize the library */
+        if (!glfwInit()) {
+            throw std::runtime_error("Unable to initialize library");
+        }
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
+        /* Create a windowed mode window and its OpenGL context */
+        window = glfwCreateWindow(width, height, title, NULL, NULL);
+        if (!window) {
+            glfwTerminate();
+            throw std::runtime_error("Unable to construct window");
+        }
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window)
-    {
+        /* Make the window's context current */
+        glfwMakeContextCurrent(window);
+    }
+
+    easy_gl::~easy_gl() {
+        // terminate glfw
         glfwTerminate();
-        return -1;
     }
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+    void easy_gl::run() {
+        /* Loop until the user closes the window */
+        while (!glfwWindowShouldClose(window)) {
+            /* Render here */
+            glClear(GL_COLOR_BUFFER_BIT);
 
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+            /* Swap front and back buffers */
+            glfwSwapBuffers(window);
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-
-        /* Poll for and process events */
-        glfwPollEvents();
+            /* Poll for and process events */
+            glfwPollEvents();
+        }
     }
 
-    glfwTerminate();
-    return 0;
-}
+} // EasyGL namespace
