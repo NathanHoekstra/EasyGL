@@ -1,4 +1,4 @@
-#include "easygl.h"
+#include "../include/EasyGL/easygl.h"
 
 #include <GLFW/glfw3.h>
 

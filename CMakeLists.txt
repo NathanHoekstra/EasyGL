@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
+file(GLOB CPP_FILES source/*.cpp)
+
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
 find_package(OpenGL REQUIRED)
@@ -27,7 +29,7 @@ else()
     set(LIBS )
 endif(WIN32)
 
-add_library(EasyGL STATIC easygl.cpp)
+add_library(EasyGL STATIC ${CPP_FILES})
 
 target_link_libraries(EasyGL ${LIBS})
 
